@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import com.example.demo.Question;
 import com.example.demo.service.QuestionService;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("question")
@@ -20,29 +21,29 @@ public class QuestionController {
     @Autowired
     QuestionService questionService;
 
-    @GetMapping("allquestions")
-    public List<Question> getAllQuestions(){
-        return questionService.getAllQuestions();
-    }
+        @GetMapping("allquestions")
+        public ResponseEntity<List<Question>> getAllQuestions() {
+            return questionService.getAllQuestions();
+        }
 
-    @GetMapping("difficulty/{diff}")
-    public List<Question> getByDifficulty(@PathVariable String diff){
-        return questionService.getByDifficulty(diff);
-    }
+        @GetMapping("difficulty/{diff}")
+        public ResponseEntity<List<Question>> getByDifficulty(@PathVariable String diff) {
+            return questionService.getByDifficulty(diff);
+        }
 
-    @PostMapping("add")
-    public String addQuestion(@RequestBody Question question){
-        return questionService.addQuestion(question);
-    }
+        @PostMapping("add")
+        public ResponseEntity<String> addQuestion(@RequestBody Question question) {
+            return questionService.addQuestion(question);
+        }
 
-    @DeleteMapping("delete/{id}")
-    public String deleteQuestion(@PathVariable Integer id){
-        return questionService.deleteQuestion(id);
-    }
+        @DeleteMapping("delete/{id}")
+        public ResponseEntity<String> deleteQuestion(@PathVariable Integer id) {
+            return questionService.deleteQuestion(id);
+        }
 
-    @PutMapping("/update")
-    public String updateString(@RequestBody Question question){
-        return questionService.updateQuestion(question);
-    }
+        @PutMapping("/update")
+        public ResponseEntity<String> updateString(@RequestBody Question question) {
+            return questionService.updateQuestion(question);
+        }
 
 }
