@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Question;
 import com.example.demo.dao.QuestionDao;
+import com.example.demo.model.Question;
 
 @Service
 public class QuestionService {
@@ -66,6 +66,10 @@ public class QuestionService {
             e.printStackTrace();
         }
         return new ResponseEntity<>("Failed", HttpStatus.BAD_REQUEST);
+    }
+
+    public List<Question> getCustomQuestions(String difficulty, Integer numQ){
+        return questionDao.getCustomQuestions(difficulty, numQ);
     }
     
 }

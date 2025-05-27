@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import com.example.demo.Question;
+
+import com.example.demo.model.Question;
 import com.example.demo.service.QuestionService;
 import org.springframework.http.ResponseEntity;
 
