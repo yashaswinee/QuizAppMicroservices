@@ -13,6 +13,7 @@ import com.example.demo.dao.QuizDao;
 import com.example.demo.model.Question;
 import com.example.demo.model.QuestionWrapper;
 import com.example.demo.model.Quiz;
+import com.example.demo.model.QuizResponse;
 
 @Service
 public class QuizService {
@@ -48,5 +49,23 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(retQW, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getScore(Integer id, List<QuizResponse> reponses) {
+        int retScore=0;
+        int index=0;
+
+        List<Question> questions = quizDao.findById(id).get().getQuestion();
+
+        for (QuizResponse response : reponses){
+            
+            if (response.getResponse().equals(questions.get(index).getAnswer())){
+                retScore++;
+            }
+            index++;
+        }
+
+        return new ResponseEntity<>(retScore, HttpStatus.OK);
+
     }
 }
