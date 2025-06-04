@@ -1,4 +1,4 @@
-package com.quiz.quiz_service;
+package com.questionService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class QuizServiceApplication {
+public class QuestionServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuizServiceApplication.class, args);
+		SpringApplication.run(QuestionServiceApplication.class, args);
 	}
 
 }

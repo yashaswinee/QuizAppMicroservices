@@ -1,6 +1,7 @@
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/Question.java
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/QuestionApplication.java
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/config/DataInitializer.java
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/controller/QuestionController.java
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/dao/QuestionDao.java
-/home/yeshu/Desktop/project/demo/src/main/java/com/example/demo/service/QuestionService.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/QuestionServiceApplication.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/controller/QuestionController.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/dao/QuestionDao.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/model/Question.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/model/QuestionWrapper.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/model/QuizResponse.java
+/home/yeshu/Desktop/project/question-service/src/main/java/com/questionService/service/QuestionService.java

@@ -25,7 +25,7 @@ public class QuizController {
     QuizService quizService;
 
     @PostMapping("create")
-    public ResponseEntity<List<Integer>>createQuiz(@RequestBody CreateDto data){
+    public ResponseEntity<String>createQuiz(@RequestBody CreateDto data){
         return quizService.createQuiz(data.getDifficulty(), data.getNumQ(), data.getTitle());
     }
 

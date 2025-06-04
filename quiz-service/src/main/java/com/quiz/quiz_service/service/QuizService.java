@@ -2,7 +2,6 @@ package com.quiz.quiz_service.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.quiz.quiz_service.dao.QuizDao;
+import com.quiz.quiz_service.feign.QuizInteface;
 import com.quiz.quiz_service.model.QuestionWrapper;
 import com.quiz.quiz_service.model.Quiz;
 import com.quiz.quiz_service.model.QuizResponse;
@@ -20,19 +20,19 @@ public class QuizService {
     @Autowired
     QuizDao quizDao;
 
-    public ResponseEntity<List<Integer>> createQuiz(String difficulty, Integer numQ, String title){
+    @Autowired
+    QuizInteface quizInteface;
+
+    public ResponseEntity<String> createQuiz(String difficulty, Integer numQ, String title){
         
-        List<Integer> ids = new ArrayList<>();
-        // Quiz quiz = new Quiz();
+        List<Integer> ids = quizInteface.generateQuiz(difficulty, numQ).getBody();
+        Quiz quiz = new Quiz();
+        
+        quiz.setTitle(title);
+        quiz.setQuestionIds(ids);
+        quizDao.save(quiz);
 
-        // List<Question> questions = questionService.getCustomQuestions(difficulty, numQ);
-
-        // quiz.setTitle(title);
-        // quiz.setQuestion(questions);
-        // quizDao.save(quiz);
-
-        return new ResponseEntity<>(ids, HttpStatus.CREATED);
-
+        return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id){
