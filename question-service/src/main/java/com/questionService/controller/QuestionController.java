@@ -55,8 +55,8 @@ public class QuestionController {
         return questionService.generateQuiz(difficulty, NumQ);
     }
  
-    @GetMapping("/getQuestions")
-    public ResponseEntity<List<QuestionWrapper>> getQuestions(@RequestBody List<Integer> ids){
+    @GetMapping("/getQuestions/{ids}")
+    public ResponseEntity<List<QuestionWrapper>> getQuestions(@PathVariable List<Integer> ids){
         return questionService.getQuestions(ids);
     }
 

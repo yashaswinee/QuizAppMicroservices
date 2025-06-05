@@ -1,6 +1,5 @@
 package com.quiz.quiz_service.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,17 +35,10 @@ public class QuizService {
     }
 
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Integer id){
-        
-        // Optional<Quiz> quiz = quizDao.findById(id);
-        List<QuestionWrapper> retQW = new ArrayList<>();
-        // List<Question> QDataBase = quiz.get().getQuestion();
-
-        // for(Question tempQW : QDataBase){
-        //     QuestionWrapper qw = new QuestionWrapper(tempQW.getId(), tempQW.getQuestionTitle(), tempQW.getOption1(), tempQW.getOption2(), tempQW.getOption3(), tempQW.getOption4());
-        //     retQW.add(qw);
-        // }
-
-        return new ResponseEntity<>(retQW, HttpStatus.OK);
+        Quiz quiz = quizDao.findById(id).get();
+        List<Integer> ids = quiz.getQuestionIds();
+        ResponseEntity<List<QuestionWrapper>> retQW = quizInteface.getQuestions(ids);
+        return retQW;
     }
 
     public ResponseEntity<Integer> getScore(Integer id, List<QuizResponse> reponses) {
