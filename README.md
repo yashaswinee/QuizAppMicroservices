@@ -127,35 +127,63 @@ All endpoints are accessible via the API Gateway at `http://localhost:8765`. Pre
 
 ```
 ┌─────────────────┐    Register   ┌──────────────────┐
-│   User Service  │ ────────────► │   Eureka Server  │
-│   (Port: 8081)  │               │   (Port: 8761)   │
+│   Quiz Service  │ ────────────► │   Eureka Server  │
+│   (Port: 8090)  │               │   (Port: 8761)   │
 └─────────────────┘               └──────────────────┘
-                                           │
-┌─────────────────┐    Register            │
-│  Order Service  │ ───────────────────────┘
-│   (Port: 8082)  │
+                                          │
+┌─────────────────┐    Register           │
+│Question Service │ ──────────────────────┤
+│   (Port: 8080)  │                       │
+└─────────────────┘                       │
+                                          │
+┌─────────────────┐    Register           │
+│Question Service │ ──────────────────────┤
+│   (Port: 8081)  │                       │
+└─────────────────┘                       │
+                                          │
+┌─────────────────┐    Register           │
+│  API Gateway    │ ──────────────────────┘
+│   (Port: 8765)  │
 └─────────────────┘
 ```
-Each microservice starts up and registers itself with Eureka Server. Registration includes: service name, IP address, port, health check URL
+Each microservice starts up and registers itself with Eureka Server. Registration includes: service name, IP address, port
 
-## Complete Flow 
+## Complete Flow (creating quiz with questions) 
 
 ```
-┌─────────────────┐                    ┌──────────────────┐
-│  Order Service  │                    │   Eureka Server  │
-│                 │                    │                  │
-│ 1. userClient   │ ──── 2. Lookup ──► │ Registry:        │
-│    .getUserById │                    │ • user-service   │
-│    (123)        │ ◄─── 3. Response ──│ 192.168.1.5:8081 │
-│                 │                    └──────────────────┘
-│ 4. HTTP GET     │
-│    /users/123   │ ──────────────────────────────────────►
-│                 │                                        │
-│                 │ ◄──────────────────────────────────────┤
-│ 6. User object  │          5. User data                  │
-└─────────────────┘                      ┌──────────────────┐
-                                         │   User Service   │
-                                         │ 192.168.1.5:8081 │
-                                         └──────────────────┘
-
+┌─────────────────┐  1. POST /quiz   ┌─────────────────┐
+│     Client      │ ───────────────► │  API Gateway    │
+│                 │                  │   (Port: 8765)  │
+└─────────────────┘                  └─────────────────┘
+                                              │
+                                              │ 2. Route to
+                                              │    quiz-service
+                                              ▼
+                                    ┌─────────────────┐
+                                    │   Quiz Service  │
+                                    │   (Port: 8090)  │
+                                    └─────────────────┘
+                                              │
+                                              │ 3. Get questions
+                                              │    for quiz
+                                              ▼
+                                    ┌──────────────────┐
+                                    │   Eureka Server  │
+                                    │   (Port: 8761)   │
+                                    └──────────────────┘
+                                              │
+                                              │ 4. Service
+                                              │    discovery
+                                              ▼
+                    ┌─────────────────┐              ┌─────────────────┐
+                    │Question Service │              │Question Service │
+                    │   (Port: 8080)  │   OR         │   (Port: 8081)  │
+                    └─────────────────┘              └─────────────────┘
+                              │                                │
+                              │ 5. Database query              │
+                              ▼                                ▼
+                    ┌──────────────────────────────────────────────────┐
+                    │              PostgreSQL Database                 │
+                    │                   (quizdb)                       │
+                    └──────────────────────────────────────────────────┘
 ```
