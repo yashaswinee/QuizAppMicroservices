@@ -42,20 +42,8 @@ public class QuizService {
     }
 
     public ResponseEntity<Integer> getScore(Integer id, List<QuizResponse> reponses) {
-        int retScore=0;
-        // int index=0;
-
-        // List<Question> questions = quizDao.findById(id).get().getQuestion();
-
-        // for (QuizResponse response : reponses){
-            
-        //     if (response.getResponse().equals(questions.get(index).getAnswer())){
-        //         retScore++;
-        //     }
-        //     index++;
-        // }
-
-        return new ResponseEntity<>(retScore, HttpStatus.OK);
+        ResponseEntity<Integer> retScore = quizInteface.getScore(reponses);        
+        return retScore;
 
     }
 }
