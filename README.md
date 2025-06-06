@@ -7,15 +7,6 @@ This is a microservices-based Quiz Service application designed to manage quizze
 The application leverages **Spring Boot** for rapid development and includes dependencies like **Spring Data JPA**, **Spring Web**, **PostgreSQL**, **OpenFeign**, **Eureka Discovery Client/Server**, and **Lombok** to reduce boilerplate code. The services interact with a shared PostgreSQL database
  and are designed for scalability, with the Question Service running on two instances for load balancing.
 
-<!-- ## Features
-
-- **Quiz Service**: Create, retrieve, and submit quizzes with customizable difficulty and question count.
-- **Question Service**: Manage questions (CRUD operations), generate quizzes, and calculate scores.
-- **Service Discovery**: Uses Netflix Eureka for dynamic service registration and discovery.
-- **API Gateway**: Centralized routing for all service endpoints with cross-cutting concerns like security and monitoring.
-- **Scalability**: Question Service runs on two instances (ports 8080 and 8081) for load balancing.
-- **Database**: PostgreSQL with JPA Repository for automated and encapsulated database operations. -->
-
 ## Technologies Used
 
 - **Spring Boot**: Framework for building microservices with embedded Apache Tomcat.
@@ -51,21 +42,15 @@ The project is structured with the following layers:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/quiz-service.git
+   git clone https://github.com/yashaswinee/quiz-service.git
    cd quiz-service
    ```
 
 2. **Configure PostgreSQL**:
 
-   - Create a database named `quizdb`.
+   - Create a database named `quizdb` and `questiondb`.
 
    - Update the `application.properties` or `application.yml` files in the Quiz and Question Services with your PostgreSQL credentials:
-
-     ```properties
-     spring.datasource.url=jdbc:postgresql://localhost:5432/quizdb
-     spring.datasource.username=your-username
-     spring.datasource.password=your-password
-     ```
 
 3. **Access the Eureka Dashboard**:
 
