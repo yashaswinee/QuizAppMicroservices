@@ -172,3 +172,37 @@ Each microservice starts up and registers itself with Eureka Server. Registratio
                     │                   (quizdb)                       │
                     └──────────────────────────────────────────────────┘
 ```
+
+## Testing Using Locust
+
+### Single instance of question service
+
+Services and gateway in Eureka Service Registry
+
+![Single instance question service](<images/Screenshot from 2025-06-10 00-24-43.png>)
+
+Graph visuals of Reponses per second, failures, number of users
+
+![graphs of single instance](<images/Screenshot from 2025-06-10 00-24-31.png>)
+
+![values of single instance](<images/Screenshot from 2025-06-10 00-24-36-1.png>)
+
+### Dual instance of question service
+
+Services and gateway in Eureka Service Registry
+
+![Double instance question service](<images/Screenshot from 2025-06-10 00-17-06.png>)
+
+Graph visuals of Reponses per second, failures, number of users
+
+![graphs of double instance](<images/Screenshot from 2025-06-10 00-20-26.png>)
+
+![values of double instance](<images/Screenshot from 2025-06-10 00-20-34-1.png>)
+
+
+## Findings
+
+- **15% Performance Improvement:** Doubling the instances reduced median response time from 74ms to 63ms
+- **Improved Tail Latency:** 95th percentile improved by 11% (180ms → 160ms) and 99th percentile by 12% (250ms → 220ms)
+- **Zero Failures:** Both configurations maintained 100% success rate under high load (~1200 RPS)
+- **Consistent Throughput:** Both setups handled the load effectively with no degradation in reliability
